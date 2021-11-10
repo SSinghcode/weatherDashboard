@@ -61,4 +61,33 @@ function cityCall(city) {
       });
    
   }
+  function processForecast(data) {
+ 
+    $("#forecast").empty();
+    let newH = $("<h2>").text("5 Day Forecast:");
+    $("#forecast").append(newH);
+  
+    let newCardContainerEl = $("<div>")
+      .attr("id", "cardContainer")
+      .attr("class", "row");
+   
+    for (i = 1; i <= 5; i++) {
+      let iconFEl =
+      "http://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png";
+      
+      let newCard = $("<div>").attr("class", "col bg-secondary");
+      let line5 = $("<p>").text(`${today.format("ddd-mm-yy")}`);
+      let  line= $("<p>").text(`Temp: ${data.daily[i].temp.day}°C`);
+      let line2 = $("<p>").text(`Wind Speed: ${data.daily[i].wind_speed}KM/H`);
+      let line3 = $("<p>").text(`Humidity: ${data.daily[i].humidity}%`);
+      let line4 = $("<img>").attr("src", iconFEl);
+      newCard.append(line5 );
+      newCard.append(line4);
+      newCard.append(line);
+      newCard.append(line2 );
+      newCard.append(line3);
+      newCardContainerEl.append(newCard);
+    }
+    $("#forecast").append(newCardContainerEl);
+  }
   
